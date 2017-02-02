@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Canvas App</string>
+    <string name="reset">Reset</string>
+
+    <string name="show">Show</string>
+    <string name="hide">Hide</string>
+
+    <string name="opacity_size">Opacity: %d</string>
+    <string name="frame_size">Frame Size: %d</string>
+    <string name="blur_area">Blur Area: %d</string>
+    <string name="blur_quantity">Blur Quantity: %d</string>
+
+    <string name="clipped_rect">Clipped Rect</string>
+    <string name="fragment_hole_1">Hole 1</string>
+    <string name="fragment_hole_2">Dual 2</string>
+    <string name="fragment_hole_3">Dual 3</string>
+    <string name="pixel_mover">Pixel Mover</string>
+    <string name="fragment_frame">Frame</string>
+    <string name="fragment_distort">Blur</string>
+    <string name="fragment_clip">Clipping</string>
+    <string name="fragment_circle">Circles</string>
+
+    <string-array name="frames">
+        <item>Wood Frame</item>
+        <item>Metal Frame</item>
+    </string-array>
+</resources>

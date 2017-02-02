@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/fragment_vertical_margin"
+    android:paddingLeft="@dimen/fragment_horizontal_margin"
+    android:paddingRight="@dimen/fragment_horizontal_margin"
+    android:paddingTop="@dimen/fragment_vertical_margin"
+    android:background="@color/white">
+
+    <com.livefront.canvasapp.view.CircleMaskView3
+        android:id="@+id/circle_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/opacity_seekbar_container"
+        android:background="@color/colorPrimary"
+        android:scaleType="centerCrop"
+        android:src="@drawable/awesome"
+        app:maskColor="@color/transparent_accent" />
+
+    <LinearLayout
+        android:id="@id/opacity_seekbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/opacity_seekbar_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <SeekBar
+            android:id="@+id/opacity_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="255" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/fragment_vertical_margin"
+    android:paddingLeft="@dimen/fragment_horizontal_margin"
+    android:paddingRight="@dimen/fragment_horizontal_margin"
+    android:paddingTop="@dimen/fragment_vertical_margin"
+    android:background="@color/white">
+
+    <com.livefront.canvasapp.view.BlurCanvas
+        android:id="@+id/canvas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/blur_size_seekbar_container"
+        android:layout_centerInParent="true"
+        android:background="@color/colorPrimary"
+        app:blurRadius="10"
+        app:blurSize="150"
+        app:image="@drawable/awesome" />
+
+    <LinearLayout
+        android:id="@id/blur_size_seekbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/blur_radius_seekbar_container"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/blur_size_seekbar_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <SeekBar
+            android:id="@+id/blur_size_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="300" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@id/blur_radius_seekbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/reset_button"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/blur_radius_seekbar_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <SeekBar
+            android:id="@+id/blur_radius_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="200" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@id/reset_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/fragment_vertical_margin"
+        android:background="@drawable/ripple_color_primary"
+        android:text="@string/reset"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

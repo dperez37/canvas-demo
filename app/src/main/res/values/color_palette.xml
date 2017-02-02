@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Livefront color palette -->
+    <color name="livefront_blue_dark">#435464</color>
+    <color name="livefront_blue_dark_with_scrim">#394855</color>
+    <color name="livefront_blue_light">#6fc5e8</color>
+    <color name="livefront_green">#81bd41</color>
+    <color name="livefront_green_dark">#618e30</color>
+    <color name="livefront_grey_dark">#666766</color>
+    <color name="livefront_grey_light">#dbd9d6</color>
+    <color name="livefront_grey_medium">#b3b2b1</color>
+
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/fragment_vertical_margin"
+    android:paddingLeft="@dimen/fragment_horizontal_margin"
+    android:paddingRight="@dimen/fragment_horizontal_margin"
+    android:paddingTop="@dimen/fragment_vertical_margin"
+    android:background="@color/white">
+
+    <com.livefront.canvasapp.view.ClipPathCanvas
+        android:id="@+id/canvas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/reset_button"
+        android:background="@drawable/awesome"
+        app:fillColor="@color/colorPrimary"
+        app:strokeColor="@color/colorPathStroke" />
+
+    <Button
+        android:id="@id/reset_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/fragment_vertical_margin"
+        android:background="@drawable/ripple_color_primary"
+        android:text="@string/reset"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="image" format="reference" />
+
+    <declare-styleable name="ClipPathCanvas">
+        <attr name="fillColor" format="color" />
+        <attr name="strokeColor" format="color" />
+        <attr name="strokeWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="MyViewPager">
+        <attr name="ignoreSwipe" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="BlurCanvas">
+        <attr name="image" />
+        <attr name="blurRadius" format="integer" />
+        <attr name="blurSize" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="FrameCanvas">
+        <attr name="image" />
+        <attr name="frameSize" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleMaskView1">
+        <attr name="maskColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="PixelMoverCanvas">
+        <attr name="image" />
+    </declare-styleable>
+
+</resources>
