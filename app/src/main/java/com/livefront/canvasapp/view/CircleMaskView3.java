@@ -60,25 +60,23 @@ public class CircleMaskView3 extends AppCompatImageView {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        float measuredWidth = getMeasuredWidth();
-        float measuredHeight = getMeasuredHeight();
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
         float firstX;
         float secondX;
         float firstY;
         float secondY;
         float radius;
-        if (measuredHeight > measuredWidth) {
-            firstX = secondX = measuredWidth / 2f;
-            firstY = measuredHeight / 3f;
-            secondY = 2f * measuredHeight / 3f;
-            radius = measuredWidth / 2f;
+        if (h > w) {
+            firstX = secondX = w / 2f;
+            firstY = h / 3f;
+            secondY = 2f * h / 3f;
+            radius = w / 2f;
         } else {
-            firstY = secondY = measuredHeight / 2f;
-            firstX = measuredWidth / 3f;
-            secondX = 2f * measuredWidth / 3f;
-            radius = measuredHeight / 2f;
+            firstY = secondY = h / 2f;
+            firstX = w / 3f;
+            secondX = 2f * w / 3f;
+            radius = h / 2f;
         }
 
         mCircleClipPath.reset();

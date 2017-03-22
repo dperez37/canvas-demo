@@ -60,12 +60,10 @@ public class CircleMaskView1 extends AppCompatImageView {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        float measuredWidth = getMeasuredWidth();
-        float measuredHeight = getMeasuredHeight();
-        float centerX = measuredWidth / 2f;
-        float centerY = measuredHeight / 2f;
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        float centerX = w / 2f;
+        float centerY = h / 2f;
         float radius = Math.min(centerY, centerX);
 
         mCircleClipPath.reset();
