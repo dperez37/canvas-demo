@@ -10,6 +10,7 @@ import android.graphics.Path;
 import android.graphics.Region;
 import android.os.Build;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
@@ -27,7 +28,7 @@ public class ClipPathCanvas extends View {
 
     @ColorInt
     private int mFillColor = DEFAULT_FILL_COLOR;
-    private Path mPath;
+    private Path mPath = new Path();
     private Paint mStrokePaint;
 
     public ClipPathCanvas(Context context) {
@@ -56,8 +57,6 @@ public class ClipPathCanvas extends View {
         mStrokePaint.setAntiAlias(true);
         mStrokePaint.setStyle(Paint.Style.STROKE);
 
-        mPath = new Path();
-
         if (attrs == null) {
             mStrokePaint.setColor(DEFAULT_STROKE_COLOR);
             return;
@@ -81,17 +80,14 @@ public class ClipPathCanvas extends View {
         int action = MotionEventCompat.getActionMasked(event);
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                mPath.moveTo(event.getX(), event.getY());
-                invalidate();
+                onActionDown(event);
                 return true;
             case MotionEvent.ACTION_MOVE:
-                mPath.lineTo(event.getX(), event.getY());
-                invalidate();
+                onActionMove(event);
                 return true;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                mPath.close();
-                invalidate();
+                onActionUp(event);
                 return true;
             default:
                 return super.onTouchEvent(event);
@@ -104,6 +100,21 @@ public class ClipPathCanvas extends View {
 
         canvas.clipPath(mPath, Region.Op.XOR);
         canvas.drawColor(mFillColor);
+    }
+
+    private void onActionDown(@NonNull MotionEvent event) {
+        mPath.moveTo(event.getX(), event.getY());
+    }
+
+    private void onActionMove(@NonNull MotionEvent event) {
+        mPath.lineTo(event.getX(), event.getY());
+        invalidate();
+    }
+
+    private void onActionUp(@NonNull MotionEvent event) {
+        mPath.lineTo(event.getX(), event.getY());
+        mPath.close();
+        invalidate();
     }
 
     public void reset() {
