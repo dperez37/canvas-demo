@@ -13,6 +13,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
@@ -113,20 +114,14 @@ public class FrameCanvas extends View {
         int action = MotionEventCompat.getActionMasked(event);
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                mStartPoint = MotionEventUtil.eventToPoint(event);
-                mEndPoint = null;
+                onActionDown(event);
                 return true;
             case MotionEvent.ACTION_MOVE:
-                mEndPoint = MotionEventUtil.eventToPoint(event);
-                calculateRect();
-                invalidate();
+                onActionMove(event);
                 return true;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                mEndPoint = MotionEventUtil.eventToPoint(event);
-                calculateRect();
-                calculateFrame();
-                invalidate();
+                onActionUp(event);
                 return true;
             default:
                 return super.onTouchEvent(event);
@@ -198,6 +193,24 @@ public class FrameCanvas extends View {
                 mInnerRect.top - mPaddingHeight,
                 mInnerRect.width(),
                 mInnerRect.height());
+    }
+
+    private void onActionDown(@NonNull MotionEvent event) {
+        mStartPoint = MotionEventUtil.eventToPoint(event);
+        mEndPoint = null;
+    }
+
+    private void onActionMove(@NonNull MotionEvent event) {
+        mEndPoint = MotionEventUtil.eventToPoint(event);
+        calculateRect();
+        invalidate();
+    }
+
+    private void onActionUp(@NonNull MotionEvent event) {
+        mEndPoint = MotionEventUtil.eventToPoint(event);
+        calculateRect();
+        calculateFrame();
+        invalidate();
     }
 
     public void reset() {
