@@ -14,7 +14,7 @@ Custom canvas in Android
 
 <a name="devsetup"></a>
 ##Setting up a dev environment
-1. Install [Android Studio] (http://developer.android.com/intl/ja/sdk/index.html)
+1. Install [Android Studio](http://developer.android.com/intl/ja/sdk/index.html)
 2. Install the [SDK Tools](http://developer.android.com/sdk/tools-notes.html)
 3. Clone the Livefront Android repo.
 
