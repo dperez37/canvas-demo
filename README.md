@@ -6,15 +6,15 @@ Custom canvas in Android
 * [Licensing / Third-party dependencies](#licensing)
 
 <a name="compatibility"></a>
-##Compatibility
+## Compatibility
 * **Minimum SDK**: 21
 * **Target SDK**: 25
 * **Device Types Supported**: Phone & Tablet
 * **Orientations Supported**: Portrait and Landscape
 
 <a name="devsetup"></a>
-##Setting up a dev environment
-1. Install [Android Studio] (http://developer.android.com/intl/ja/sdk/index.html)
+## Setting up a dev environment
+1. Install [Android Studio](http://developer.android.com/intl/ja/sdk/index.html)
 2. Install the [SDK Tools](http://developer.android.com/sdk/tools-notes.html)
 3. Clone the Livefront Android repo.
 

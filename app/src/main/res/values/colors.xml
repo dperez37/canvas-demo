@@ -5,7 +5,7 @@
     <color name="colorPrimaryDark">@color/livefront_blue_dark_with_scrim</color>
     <color name="colorAccent">@color/livefront_green_dark</color>
 
-    <color name="transparent_accent">#618e30</color>
+    <color name="transparent_accent">#00618e30</color>
 
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>

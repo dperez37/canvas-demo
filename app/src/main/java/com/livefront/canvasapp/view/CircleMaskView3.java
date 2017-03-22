@@ -1,6 +1,5 @@
 package com.livefront.canvasapp.view;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -8,17 +7,16 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Region;
-import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import com.livefront.canvasapp.R;
 
-public class CircleMaskView3 extends ImageView {
+public class CircleMaskView3 extends AppCompatImageView {
 
     @ColorInt
     private static final int DEFAULT_MASK_COLOR = Color.WHITE;
@@ -39,13 +37,6 @@ public class CircleMaskView3 extends ImageView {
     public CircleMaskView3(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs, defStyleAttr, 0);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public CircleMaskView3(Context context, AttributeSet attrs,
-                           int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(attrs, defStyleAttr, defStyleRes);
     }
 
     private void init(@Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -69,25 +60,23 @@ public class CircleMaskView3 extends ImageView {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        float measuredWidth = getMeasuredWidth();
-        float measuredHeight = getMeasuredHeight();
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
         float firstX;
         float secondX;
         float firstY;
         float secondY;
         float radius;
-        if (measuredHeight > measuredWidth) {
-            firstX = secondX = measuredWidth / 2f;
-            firstY = measuredHeight / 3f;
-            secondY = 2f * measuredHeight / 3f;
-            radius = measuredWidth / 2f;
+        if (h > w) {
+            firstX = secondX = w / 2f;
+            firstY = h / 3f;
+            secondY = 2f * h / 3f;
+            radius = w / 2f;
         } else {
-            firstY = secondY = measuredHeight / 2f;
-            firstX = measuredWidth / 3f;
-            secondX = 2f * measuredWidth / 3f;
-            radius = measuredHeight / 2f;
+            firstY = secondY = h / 2f;
+            firstX = w / 3f;
+            secondX = 2f * w / 3f;
+            radius = h / 2f;
         }
 
         mCircleClipPath.reset();

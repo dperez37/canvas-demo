@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/reset_button"
-        android:background="@drawable/awesome"
+        android:background="@color/colorAccent"
         app:fillColor="@color/colorPrimary"
         app:strokeColor="@color/colorPathStroke" />
 
