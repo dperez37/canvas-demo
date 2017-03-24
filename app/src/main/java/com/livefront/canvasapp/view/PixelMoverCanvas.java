@@ -29,7 +29,10 @@ public class PixelMoverCanvas extends View {
     private Bitmap mBitmap;
     private Bitmap mDrawBitmap;
 
-    private Rect mRect;
+    private Rect mOriginalRect;
+    private int[] mPix;
+    private Rect mIntermediateRect;
+    private int[] mIntermediatePix;
 
     private int mPaddingWidth = 0;
     private int mPaddingHeight = 0;
@@ -83,6 +86,16 @@ public class PixelMoverCanvas extends View {
     }
 
     @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        canvas.drawBitmap(mDrawBitmap, mPaddingWidth, mPaddingHeight, null);
+
+        if (mOriginalRect != null) {
+            canvas.drawRect(mOriginalRect, mPaint);
+        }
+    }
+
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mPaddingWidth = (w - mBitmap.getWidth()) / 2;
@@ -96,6 +109,9 @@ public class PixelMoverCanvas extends View {
             case MotionEvent.ACTION_DOWN:
                 onActionDown(event);
                 return true;
+            case MotionEvent.ACTION_MOVE:
+                onActionMove(event);
+                return true;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
                 onActionUp(event);
@@ -107,17 +123,81 @@ public class PixelMoverCanvas extends View {
 
     private void onActionDown(@NonNull MotionEvent event) {
         Point point = MotionEventUtil.eventToPoint(event);
-        mRect = MotionEventUtil.sqRectFromPoint(
+        mOriginalRect = MotionEventUtil.sqRectFromPoint(
                 point,
                 mSectionSize,
                 mBitmap.getWidth(),
                 mBitmap.getHeight(),
                 mPaddingWidth,
                 mPaddingHeight);
+
+        mPix = new int[mOriginalRect.width() * mOriginalRect.height()];
+        mDrawBitmap.getPixels(
+                mPix,
+                0,
+                mOriginalRect.width(),
+                mOriginalRect.left - mPaddingWidth,
+                mOriginalRect.top - mPaddingHeight,
+                mOriginalRect.width(),
+                mOriginalRect.height());
+
+        invalidate();
+    }
+
+    private void onActionMove(@NonNull MotionEvent event) {
+        // Reset intermediate rect pixels
+        if (mIntermediatePix != null) {
+            mDrawBitmap.setPixels(
+                    mIntermediatePix,
+                    0,
+                    mIntermediateRect.width(),
+                    mIntermediateRect.left - mPaddingWidth,
+                    mIntermediateRect.top - mPaddingHeight,
+                    mIntermediateRect.width(),
+                    mIntermediateRect.height());
+        }
+
+        Point point = MotionEventUtil.eventToPoint(event);
+        mIntermediateRect = MotionEventUtil.sqRectFromPoint(
+                point,
+                mSectionSize,
+                mBitmap.getWidth(),
+                mBitmap.getHeight(),
+                mPaddingWidth,
+                mPaddingHeight);
+
+        mIntermediatePix = new int[mIntermediateRect.width() * mIntermediateRect.height()];
+        mDrawBitmap.getPixels(
+                mIntermediatePix,
+                0,
+                mIntermediateRect.width(),
+                mIntermediateRect.left - mPaddingWidth,
+                mIntermediateRect.top - mPaddingHeight,
+                mIntermediateRect.width(),
+                mIntermediateRect.height());
+
+        mDrawBitmap.setPixels(
+                mPix,
+                0,
+                mIntermediateRect.width(),
+                mIntermediateRect.left - mPaddingWidth,
+                mIntermediateRect.top - mPaddingHeight,
+                mIntermediateRect.width(),
+                mIntermediateRect.height());
         invalidate();
     }
 
     private void onActionUp(@NonNull MotionEvent event) {
+        // Reset intermediate rect pixels
+        mDrawBitmap.setPixels(
+                mIntermediatePix,
+                0,
+                mIntermediateRect.width(),
+                mIntermediateRect.left - mPaddingWidth,
+                mIntermediateRect.top - mPaddingHeight,
+                mIntermediateRect.width(),
+                mIntermediateRect.height());
+
         Point point = MotionEventUtil.eventToPoint(event);
         Rect rect = MotionEventUtil.sqRectFromPoint(
                 point,
@@ -127,39 +207,28 @@ public class PixelMoverCanvas extends View {
                 mPaddingWidth,
                 mPaddingHeight);
 
-        int[] pix = new int[mRect.width() * mRect.height()];
-        mDrawBitmap.getPixels(
-                pix,
-                0,
-                mRect.width(),
-                mRect.left - mPaddingWidth,
-                mRect.top - mPaddingHeight,
-                mRect.width(),
-                mRect.height());
         mDrawBitmap.setPixels(
-                pix,
+                mPix,
                 0,
                 rect.width(),
                 rect.left - mPaddingWidth,
                 rect.top - mPaddingHeight,
                 rect.width(),
                 rect.height());
+
+        mIntermediateRect = null;
+        mIntermediatePix = null;
+        mPix = null;
+
         invalidate();
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        canvas.drawBitmap(mDrawBitmap, mPaddingWidth, mPaddingHeight, null);
-
-        if (mRect != null) {
-            canvas.drawRect(mRect, mPaint);
-        }
     }
 
     public void reset() {
         mDrawBitmap = mBitmap.copy(mBitmap.getConfig(), true);
-        mRect = null;
+        mOriginalRect = null;
+        mIntermediateRect = null;
+        mIntermediatePix = null;
+        mPix = null;
         invalidate();
     }
 
