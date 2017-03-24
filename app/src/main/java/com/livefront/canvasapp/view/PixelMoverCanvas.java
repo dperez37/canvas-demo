@@ -34,6 +34,8 @@ public class PixelMoverCanvas extends View {
     private int mPaddingWidth = 0;
     private int mPaddingHeight = 0;
 
+    private int mSectionSize = SIZE_PX;
+
     public PixelMoverCanvas(Context context) {
         super(context);
         init(null, 0, 0);
@@ -73,6 +75,7 @@ public class PixelMoverCanvas extends View {
 
         BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(
                 R.styleable.PixelMoverCanvas_image);
+        mSectionSize = a.getDimensionPixelSize(R.styleable.PixelMoverCanvas_sectionSize, SIZE_PX);
         if (drawable != null) {
             mBitmap = drawable.getBitmap();
             mDrawBitmap = mBitmap.copy(mBitmap.getConfig(), true);
@@ -106,7 +109,7 @@ public class PixelMoverCanvas extends View {
         Point point = MotionEventUtil.eventToPoint(event);
         mRect = MotionEventUtil.sqRectFromPoint(
                 point,
-                SIZE_PX,
+                mSectionSize,
                 mBitmap.getWidth(),
                 mBitmap.getHeight(),
                 mPaddingWidth,
@@ -118,7 +121,7 @@ public class PixelMoverCanvas extends View {
         Point point = MotionEventUtil.eventToPoint(event);
         Rect rect = MotionEventUtil.sqRectFromPoint(
                 point,
-                SIZE_PX,
+                mSectionSize,
                 mBitmap.getWidth(),
                 mBitmap.getHeight(),
                 mPaddingWidth,
@@ -158,6 +161,14 @@ public class PixelMoverCanvas extends View {
         mDrawBitmap = mBitmap.copy(mBitmap.getConfig(), true);
         mRect = null;
         invalidate();
+    }
+
+    public int getSectionSize() {
+        return mSectionSize;
+    }
+
+    public void setSectionSize(int sectionSize) {
+        mSectionSize = sectionSize;
     }
 
 }

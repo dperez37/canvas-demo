@@ -3,6 +3,8 @@
     <dimen name="fragment_horizontal_margin">16dp</dimen>
     <dimen name="fragment_vertical_margin">16dp</dimen>
 
+    <dimen name="section_size">100dp</dimen>
+
     <dimen name="strokeWidth">4dp</dimen>
 
 </resources>

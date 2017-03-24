@@ -30,6 +30,7 @@
 
     <declare-styleable name="PixelMoverCanvas">
         <attr name="image" />
+        <attr name="sectionSize" format="integer" />
     </declare-styleable>
 
 </resources>

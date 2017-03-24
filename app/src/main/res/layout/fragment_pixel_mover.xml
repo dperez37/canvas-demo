@@ -13,9 +13,31 @@
         android:id="@+id/pixel_mover_canvas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/reset_button"
+        android:layout_above="@+id/pixel_mover_seekbar_container"
         android:background="@color/colorPrimary"
-        app:image="@drawable/awesome" />
+        app:image="@drawable/awesome"
+        app:sectionSize="@dimen/section_size" />
+
+    <LinearLayout
+        android:id="@id/pixel_mover_seekbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/reset_button"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/pixel_mover_seekbar_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <SeekBar
+            android:id="@+id/pixel_mover_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="800" />
+
+    </LinearLayout>
 
     <Button
         android:id="@id/reset_button"

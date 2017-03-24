@@ -5,6 +5,7 @@
     <string name="show">Show</string>
     <string name="hide">Hide</string>
 
+    <string name="section_size">Section Size: %d</string>
     <string name="opacity_size">Opacity: %d</string>
     <string name="frame_size">Frame Size: %d</string>
     <string name="blur_area">Blur Area: %d</string>
